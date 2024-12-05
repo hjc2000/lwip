@@ -40,33 +40,33 @@
 
 #include "cmsis_os.h"
 
-#ifdef  __cplusplus
-extern "C" {
+#ifdef __cplusplus
+extern "C"
+{
 #endif
 
 #if (osCMSIS < 0x20000U)
 
 #define SYS_MBOX_NULL (osMessageQId)0
-#define SYS_SEM_NULL  (osSemaphoreId)0
+#define SYS_SEM_NULL (osSemaphoreId)0
 
-typedef osSemaphoreId sys_sem_t;
-typedef osSemaphoreId sys_mutex_t;
-typedef osMessageQId  sys_mbox_t;
-typedef osThreadId    sys_thread_t;
+    typedef osSemaphoreId sys_sem_t;
+    typedef osSemaphoreId sys_mutex_t;
+    typedef osMessageQId sys_mbox_t;
+    typedef osThreadId sys_thread_t;
 #else
 
 #define SYS_MBOX_NULL (osMessageQueueId_t)0
-#define SYS_SEM_NULL  (osSemaphoreId_t)0
+#define SYS_SEM_NULL (osSemaphoreId_t)0
 
-typedef osSemaphoreId_t     sys_sem_t;
-typedef osSemaphoreId_t     sys_mutex_t;
-typedef osMessageQueueId_t  sys_mbox_t;
-typedef osThreadId_t        sys_thread_t;
+typedef osSemaphoreId_t sys_sem_t;
+typedef osSemaphoreId_t sys_mutex_t;
+typedef osMessageQueueId_t sys_mbox_t;
+typedef osThreadId_t sys_thread_t;
 #endif
 
-#ifdef  __cplusplus
+#ifdef __cplusplus
 }
 #endif
 
 #endif /* __SYS_ARCH_H__ */
-
