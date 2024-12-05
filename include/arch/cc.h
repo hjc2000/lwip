@@ -38,8 +38,6 @@
 
 typedef int sys_prot_t;
 
-#define LWIP_PROVIDE_ERRNO
-
 #if defined(__GNUC__) & !defined(__CC_ARM)
 
 #define LWIP_TIMEVAL_PRIVATE 0
