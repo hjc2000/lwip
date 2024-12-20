@@ -162,6 +162,7 @@ The STM32F4x7 allows computing and verifying the IP, UDP, TCP and ICMP checksums
 #define LWIP_STATS 1
 #define MIB2_STATS 1
 
+#pragma region 钩子函数
 struct pbuf;
 struct netif;
 
@@ -174,3 +175,4 @@ struct netif;
 int lwip_hook_unknown_eth_protocol(struct pbuf *pbuf, struct netif *netif);
 
 #define LWIP_HOOK_UNKNOWN_ETH_PROTOCOL(pbuf, netif) lwip_hook_unknown_eth_protocol(pbuf, netif)
+#pragma endregion
