@@ -161,3 +161,16 @@ The STM32F4x7 allows computing and verifying the IP, UDP, TCP and ICMP checksums
 
 #define LWIP_STATS 1
 #define MIB2_STATS 1
+
+struct pbuf;
+struct netif;
+
+/// @brief 钩子函数
+/// @param pbuf
+/// @param netif
+/// @return 这里返回的是 int 类型，但是实际上应该返回 err_enum_t 的枚举值。
+/// @note 这么做是因为这里没有 err_enum_t 的定义。而如果想要有 err_enum_t 的定义，
+/// 就要包含 lwip/err.h, 而 lwip/err.h 又间接包含了本头文件，于是会形成头文件循环包含。
+int lwip_hook_unknown_eth_protocol(struct pbuf *pbuf, struct netif *netif);
+
+#define LWIP_HOOK_UNKNOWN_ETH_PROTOCOL(pbuf, netif) lwip_hook_unknown_eth_protocol(pbuf, netif)
