@@ -1,5 +1,5 @@
 #include <arch/sys_arch.h>
-#include <bsp-interface/di/task.h>
+#include <base/task/IMutex.h>
 #include <lwip/err.h>
 
 namespace
@@ -7,7 +7,7 @@ namespace
     class MutexHandle
     {
     public:
-        std::shared_ptr<bsp::IMutex> _mutex = DICreate_Mutex();
+        std::shared_ptr<base::IMutex> _mutex = base::di::CreateMutex();
     };
 
 } // namespace

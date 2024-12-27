@@ -1,7 +1,7 @@
 #include <arch/sys_arch.h>
 #include <base/di/SingletonGetter.h>
+#include <base/task/IMutex.h>
 #include <bsp-interface/di/interrupt.h>
-#include <bsp-interface/di/task.h>
 
 namespace
 {
@@ -10,7 +10,7 @@ namespace
     private:
         LwipSysArch() = default;
 
-        std::shared_ptr<bsp::IMutex> _arch_protect_mutex = DICreate_Mutex();
+        std::shared_ptr<base::IMutex> _arch_protect_mutex = base::di::CreateMutex();
 
     public:
         static_function LwipSysArch &Instance()
