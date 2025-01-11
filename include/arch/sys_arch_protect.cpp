@@ -1,7 +1,7 @@
 #include <arch/sys_arch.h>
 #include <base/di/SingletonGetter.h>
 #include <base/task/IMutex.h>
-#include <bsp-interface/di/task.h>
+#include <bsp-interface/di/interrupt.h>
 
 namespace
 {
@@ -16,12 +16,22 @@ namespace
         static_function LwipSysArch &Instance()
         {
             class Getter :
-                public bsp::TaskSingletonGetter<LwipSysArch>
+                public base::SingletonGetter<LwipSysArch>
             {
             public:
                 std::unique_ptr<LwipSysArch> Create() override
                 {
                     return std::unique_ptr<LwipSysArch>{new LwipSysArch{}};
+                }
+
+                void Lock() override
+                {
+                    DI_DisableGlobalInterrupt();
+                }
+
+                void Unlock() override
+                {
+                    DI_EnableGlobalInterrupt();
                 }
             };
 
