@@ -82,7 +82,7 @@ extern "C"
 
         reinterpret_cast<SemaphoreHandle *>(sem->sem)
             ->_semaphore
-            ->TryAcquire(std::chrono::milliseconds{timeout_ms});
+            ->TryAcquire(base::Seconds{std::chrono::milliseconds{timeout_ms}});
 
         return 1;
     }
