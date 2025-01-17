@@ -20,11 +20,11 @@ extern "C"
                                 int stacksize,
                                 int prio)
     {
-        DI_CreateTask(stacksize,
-                      [thread, arg]()
-                      {
-                          thread(arg);
-                      });
+        bsp::di::task::CreateTask(stacksize,
+                                  [thread, arg]()
+                                  {
+                                      thread(arg);
+                                  });
 
         sys_thread_t ret{};
         return ret;

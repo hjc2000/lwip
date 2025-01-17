@@ -14,7 +14,7 @@ namespace
     class SemaphoreHandle
     {
     public:
-        std::shared_ptr<bsp::IBinarySemaphore> _semaphore = DICreate_BinarySemaphore();
+        std::shared_ptr<bsp::IBinarySemaphore> _semaphore = bsp::di::task::CreateBinarySemaphore();
     };
 } // namespace
 
