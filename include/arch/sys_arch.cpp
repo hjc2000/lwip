@@ -38,7 +38,7 @@ extern "C"
 
     void sys_arch_msleep(u32_t delay_ms)
     {
-        DI_Delayer().Delay(std::chrono::milliseconds{delay_ms});
+        bsp::di::Delayer().Delay(std::chrono::milliseconds{delay_ms});
     }
 }
 
