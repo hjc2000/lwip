@@ -7,7 +7,7 @@ namespace
     class MutexHandle
     {
     public:
-        std::shared_ptr<base::IMutex> _mutex = base::di::CreateMutex();
+        std::shared_ptr<base::IMutex> _mutex = base::di::CreateIMutex();
     };
 
 } // namespace

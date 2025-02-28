@@ -10,7 +10,7 @@ namespace
     private:
         LwipSysArch() = default;
 
-        std::shared_ptr<base::IMutex> _arch_protect_mutex = base::di::CreateMutex();
+        std::shared_ptr<base::IMutex> _arch_protect_mutex = base::di::CreateIMutex();
 
     public:
         static_function LwipSysArch &Instance()
