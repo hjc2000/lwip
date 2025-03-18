@@ -4,84 +4,84 @@
 
 namespace
 {
-    class MutexHandle
-    {
-    public:
-        std::shared_ptr<base::IMutex> _mutex = base::di::CreateIMutex();
-    };
+	class MutexHandle
+	{
+	public:
+		std::shared_ptr<base::IMutex> _mutex = base::CreateIMutex();
+	};
 
 } // namespace
 
 extern "C"
 {
-    /// @brief 构造一个新的互斥量。
-    /// @param mutex
-    /// @return
-    err_t sys_mutex_new(sys_mutex_t *mutex)
-    {
-        if (mutex == nullptr)
-        {
-            throw std::invalid_argument{"mutex 不能是空指针"};
-        }
+	/// @brief 构造一个新的互斥量。
+	/// @param mutex
+	/// @return
+	err_t sys_mutex_new(sys_mutex_t *mutex)
+	{
+		if (mutex == nullptr)
+		{
+			throw std::invalid_argument{"mutex 不能是空指针"};
+		}
 
-        if (mutex->mut != nullptr)
-        {
-            delete reinterpret_cast<MutexHandle *>(mutex->mut);
-        }
+		if (mutex->mut != nullptr)
+		{
+			delete reinterpret_cast<MutexHandle *>(mutex->mut);
+		}
 
-        mutex->mut = new MutexHandle{};
-        return ERR_OK;
-    }
+		mutex->mut = new MutexHandle{};
+		return ERR_OK;
+	}
 
-    /// @brief 锁定互斥量。
-    /// @param mutex
-    void sys_mutex_lock(sys_mutex_t *mutex)
-    {
-        if (mutex == nullptr)
-        {
-            throw std::invalid_argument{"mutex 不能是空指针"};
-        }
+	/// @brief 锁定互斥量。
+	/// @param mutex
+	void sys_mutex_lock(sys_mutex_t *mutex)
+	{
+		if (mutex == nullptr)
+		{
+			throw std::invalid_argument{"mutex 不能是空指针"};
+		}
 
-        if (mutex->mut == nullptr)
-        {
-            throw std::invalid_argument{"mutex->mut 不能是空指针"};
-        }
+		if (mutex->mut == nullptr)
+		{
+			throw std::invalid_argument{"mutex->mut 不能是空指针"};
+		}
 
-        reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex->Lock();
-    }
+		reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex->Lock();
+	}
 
-    /// @brief 解锁互斥量。
-    /// @param mutex
-    void sys_mutex_unlock(sys_mutex_t *mutex)
-    {
-        if (mutex == nullptr)
-        {
-            throw std::invalid_argument{"mutex 不能是空指针"};
-        }
+	/// @brief 解锁互斥量。
+	/// @param mutex
+	void sys_mutex_unlock(sys_mutex_t *mutex)
+	{
+		if (mutex == nullptr)
+		{
+			throw std::invalid_argument{"mutex 不能是空指针"};
+		}
 
-        if (mutex->mut == nullptr)
-        {
-            throw std::invalid_argument{"mutex->mut 不能是空指针"};
-        }
+		if (mutex->mut == nullptr)
+		{
+			throw std::invalid_argument{"mutex->mut 不能是空指针"};
+		}
 
-        reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex->Unlock();
-    }
+		reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex->Unlock();
+	}
 
-    /// @brief 释放互斥量。
-    /// @param mutex
-    void sys_mutex_free(sys_mutex_t *mutex)
-    {
-        if (mutex == nullptr)
-        {
-            return;
-        }
+	/// @brief 释放互斥量。
+	/// @param mutex
+	void sys_mutex_free(sys_mutex_t *mutex)
+	{
+		if (mutex == nullptr)
+		{
+			return;
+		}
 
-        if (mutex->mut == nullptr)
-        {
-            return;
-        }
+		if (mutex->mut == nullptr)
+		{
+			return;
+		}
 
-        delete reinterpret_cast<MutexHandle *>(mutex->mut);
-        mutex->mut = nullptr;
-    }
+		delete reinterpret_cast<MutexHandle *>(mutex->mut);
+		mutex->mut = nullptr;
+	}
 }
