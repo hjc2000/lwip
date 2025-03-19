@@ -1,7 +1,7 @@
-#include <arch/sys_arch.h>
-#include <base/task/IMutex.h>
-#include <bsp-interface/di/interrupt.h>
-#include <bsp-interface/TaskSingletonGetter.h>
+#include "arch/sys_arch.h"
+#include "base/define.h"
+#include "base/task/IMutex.h"
+#include "bsp-interface/TaskSingletonGetter.h"
 
 namespace
 {
