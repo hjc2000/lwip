@@ -1,3 +1,4 @@
+#include "base/task/delay.h"
 #include "FreeRTOS.h"
 #include "lwip/debug.h"
 #include "lwip/def.h"
@@ -6,7 +7,6 @@
 #include "lwip/sys.h"
 #include "semphr.h"
 #include "task.h"
-#include <bsp-interface/di/delayer.h>
 #include <bsp-interface/di/interrupt.h>
 #include <bsp-interface/di/system_time.h>
 #include <bsp-interface/di/task.h>
@@ -37,7 +37,7 @@ extern "C"
 
 	void sys_arch_msleep(u32_t delay_ms)
 	{
-		bsp::di::Delayer().Delay(std::chrono::milliseconds{delay_ms});
+		base::Delay(std::chrono::milliseconds{delay_ms});
 	}
 }
 
