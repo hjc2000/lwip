@@ -37,7 +37,7 @@ extern "C"
 
 	void sys_arch_msleep(u32_t delay_ms)
 	{
-		base::Delay(std::chrono::milliseconds{delay_ms});
+		base::task::Delay(std::chrono::milliseconds{delay_ms});
 	}
 }
 
