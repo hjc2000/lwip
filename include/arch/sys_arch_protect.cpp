@@ -1,7 +1,6 @@
 #include "arch/sys_arch.h"
 #include "base/define.h"
 #include "base/task/IMutex.h"
-#include "bsp-interface/TaskSingletonGetter.h"
 
 namespace
 {
@@ -15,18 +14,8 @@ namespace
 	public:
 		static_function LwipSysArch &Instance()
 		{
-			class Getter :
-				public bsp::TaskSingletonGetter<LwipSysArch>
-			{
-			public:
-				std::unique_ptr<LwipSysArch> Create() override
-				{
-					return std::unique_ptr<LwipSysArch>{new LwipSysArch{}};
-				}
-			};
-
-			Getter o;
-			return o.Instance();
+			static LwipSysArch o{};
+			return o;
 		}
 
 		/// @brief 用于实现 sys_arch_protect
@@ -43,6 +32,8 @@ namespace
 	};
 
 } // namespace
+
+PREINIT(LwipSysArch::Instance)
 
 extern "C"
 {
