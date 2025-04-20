@@ -1,13 +1,13 @@
-#include <arch/sys_arch.h>
-#include <base/task/IMutex.h>
-#include <lwip/err.h>
+#include "arch/sys_arch.h"
+#include "base/task/Mutex.h"
+#include "lwip/err.h"
 
 namespace
 {
 	class MutexHandle
 	{
 	public:
-		std::shared_ptr<base::IMutex> _mutex = base::CreateIMutex();
+		base::task::Mutex _mutex{};
 	};
 
 } // namespace
@@ -47,7 +47,7 @@ extern "C"
 			throw std::invalid_argument{"mutex->mut 不能是空指针"};
 		}
 
-		reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex->Lock();
+		reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex.Lock();
 	}
 
 	/// @brief 解锁互斥量。
@@ -64,7 +64,7 @@ extern "C"
 			throw std::invalid_argument{"mutex->mut 不能是空指针"};
 		}
 
-		reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex->Unlock();
+		reinterpret_cast<MutexHandle *>(mutex->mut)->_mutex.Unlock();
 	}
 
 	/// @brief 释放互斥量。

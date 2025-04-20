@@ -1,6 +1,6 @@
 #include "arch/sys_arch.h"
 #include "base/define.h"
-#include "base/task/IMutex.h"
+#include "base/task/Mutex.h"
 
 namespace
 {
@@ -9,7 +9,7 @@ namespace
 	private:
 		LwipSysArch() = default;
 
-		std::shared_ptr<base::IMutex> _arch_protect_mutex = base::CreateIMutex();
+		base::task::Mutex _arch_protect_mutex{};
 
 	public:
 		static_function LwipSysArch &Instance()
@@ -21,13 +21,13 @@ namespace
 		/// @brief 用于实现 sys_arch_protect
 		void ArchProtect()
 		{
-			_arch_protect_mutex->Lock();
+			_arch_protect_mutex.Lock();
 		}
 
 		/// @brief 用于实现 sys_arch_unprotect
 		void ArchUnprotect()
 		{
-			_arch_protect_mutex->Unlock();
+			_arch_protect_mutex.Unlock();
 		}
 	};
 
