@@ -1,10 +1,12 @@
 #include "arch/sys_arch.h"
-#include "base/task/IBinarySemaphore.h"
+#include "base/task/BinarySemaphore.h"
+#include "base/unit/Seconds.h"
 #include "FreeRTOS.h"
 #include "lwip/err.h"
 #include "lwip/sys.h"
 #include "semphr.h"
 #include "task.h"
+#include <stdexcept>
 
 namespace
 {
@@ -14,7 +16,7 @@ namespace
 	class SemaphoreHandle
 	{
 	public:
-		std::shared_ptr<base::IBinarySemaphore> _semaphore = base::CreateIBinarySemaphore(false);
+		base::task::BinarySemaphore _semaphore{false};
 	};
 } // namespace
 
@@ -36,7 +38,7 @@ extern "C"
 		{
 			reinterpret_cast<SemaphoreHandle *>(sem->sem)
 				->_semaphore
-				->Release();
+				.Release();
 		}
 
 		return ERR_OK;
@@ -58,7 +60,7 @@ extern "C"
 
 		reinterpret_cast<SemaphoreHandle *>(sem->sem)
 			->_semaphore
-			->Release();
+			.Release();
 	}
 
 	/// @brief
@@ -82,7 +84,7 @@ extern "C"
 
 		reinterpret_cast<SemaphoreHandle *>(sem->sem)
 			->_semaphore
-			->TryAcquire(base::Seconds{std::chrono::milliseconds{timeout_ms}});
+			.TryAcquire(base::Seconds{std::chrono::milliseconds{timeout_ms}});
 
 		return 1;
 	}
