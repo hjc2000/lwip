@@ -1,7 +1,6 @@
 #include "base/task/delay.h"
 #include "bsp-interface/di/interrupt.h"
 #include "bsp-interface/di/system_time.h"
-#include "bsp-interface/di/task.h"
 #include "FreeRTOS.h"
 #include "lwip/debug.h"
 #include "lwip/def.h"

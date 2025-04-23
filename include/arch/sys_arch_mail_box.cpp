@@ -10,7 +10,6 @@
 #include <arch/sys_arch.h>
 #include <bsp-interface/di/interrupt.h>
 #include <bsp-interface/di/system_time.h>
-#include <bsp-interface/di/task.h>
 #include <errno.h>
 #include <FreeRTOS.h>
 #include <lwip/sys.h>
