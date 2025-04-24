@@ -1,4 +1,4 @@
-#include "base/peripheral/systick/systick.h"
+#include "base/embedded/systick/systick.h"
 #include "base/task/delay.h"
 #include "bsp-interface/di/interrupt.h"
 #include "FreeRTOS.h"
