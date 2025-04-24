@@ -1,6 +1,6 @@
+#include "base/peripheral/systick/systick.h"
 #include "base/task/delay.h"
 #include "bsp-interface/di/interrupt.h"
-#include "bsp-interface/di/system_time.h"
 #include "FreeRTOS.h"
 #include "lwip/debug.h"
 #include "lwip/def.h"
@@ -9,6 +9,7 @@
 #include "lwip/sys.h"
 #include "semphr.h"
 #include "task.h"
+#include <chrono>
 #include <errno.h>
 
 extern "C"
@@ -22,16 +23,18 @@ extern "C"
 	/// @return
 	u32_t sys_now(void)
 	{
-		return static_cast<int64_t>(DI_SystemTime() * 1000);
+		std::chrono::milliseconds ms{base::systick::system_time_stamp()};
+		return static_cast<u32_t>(ms.count());
 	}
 
-	/// @brief 返回系统计数器的值。这个值是要上电以来的计数。硬件 systick 时钟的频率太高了，
-	/// 不考虑使用它。
+	/// @brief 返回系统计数器的值。这个值是要上电以来的计数。
+	///
 	/// @param
 	/// @return
 	u32_t sys_jiffies(void)
 	{
-		return static_cast<int64_t>(DI_SystemTime() * 1000);
+		std::chrono::nanoseconds ns{base::systick::system_time_stamp()};
+		return static_cast<u32_t>(ns.count());
 	}
 
 	void sys_arch_msleep(u32_t delay_ms)
