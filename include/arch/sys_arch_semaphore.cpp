@@ -1,6 +1,6 @@
 #include "arch/sys_arch.h"
 #include "base/task/BinarySemaphore.h"
-#include "base/unit/Second.h"
+#include "base/unit/Seconds.h"
 #include "FreeRTOS.h"
 #include "lwip/err.h"
 #include "lwip/sys.h"
@@ -82,7 +82,7 @@ extern "C"
 			throw std::invalid_argument{"sem->sem 不能是空指针"};
 		}
 
-		reinterpret_cast<SemaphoreHandle *>(sem->sem)->_semaphore.TryAcquire(base::unit::Second{std::chrono::milliseconds{timeout_ms}});
+		reinterpret_cast<SemaphoreHandle *>(sem->sem)->_semaphore.TryAcquire(base::unit::Seconds{std::chrono::milliseconds{timeout_ms}});
 		return 1;
 	}
 
