@@ -82,10 +82,7 @@ extern "C"
 			throw std::invalid_argument{"sem->sem 不能是空指针"};
 		}
 
-		reinterpret_cast<SemaphoreHandle *>(sem->sem)
-			->_semaphore
-			.TryAcquire(base::Seconds{std::chrono::milliseconds{timeout_ms}});
-
+		reinterpret_cast<SemaphoreHandle *>(sem->sem)->_semaphore.TryAcquire(base::unit::Seconds{std::chrono::milliseconds{timeout_ms}});
 		return 1;
 	}
 
