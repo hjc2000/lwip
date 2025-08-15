@@ -36,9 +36,7 @@ extern "C"
 		sem->sem = new SemaphoreHandle{};
 		if (initial_count != 0)
 		{
-			reinterpret_cast<SemaphoreHandle *>(sem->sem)
-				->_semaphore
-				.Release();
+			reinterpret_cast<SemaphoreHandle *>(sem->sem)->_semaphore.Release();
 		}
 
 		return ERR_OK;
@@ -58,9 +56,7 @@ extern "C"
 			throw std::invalid_argument{"sem->sem 不能是空指针"};
 		}
 
-		reinterpret_cast<SemaphoreHandle *>(sem->sem)
-			->_semaphore
-			.Release();
+		reinterpret_cast<SemaphoreHandle *>(sem->sem)->_semaphore.Release();
 	}
 
 	/// @brief

@@ -13,8 +13,7 @@ extern "C"
 	/// @param prio 线程优先级。
 	///
 	/// @return 返回线程句柄。
-	/// @note 本函数的实现并不会返回有效的句柄，线程由 DI_TaskManager 自动管理，
-	/// 线程函数返回的时候线程的资源会被自动回收。
+	/// @note 本函数的实现并不会返回有效的句柄，线程函数返回的时候线程的资源会被自动回收。
 	sys_thread_t sys_thread_new(char const *name,
 								lwip_thread_fn thread,
 								void *arg,
