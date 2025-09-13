@@ -1,11 +1,8 @@
 #include "arch/sys_arch.h"
 #include "base/task/BinarySemaphore.h"
 #include "base/unit/Second.h"
-#include "FreeRTOS.h"
 #include "lwip/err.h"
 #include "lwip/sys.h"
-#include "semphr.h"
-#include "task.h"
 #include <stdexcept>
 
 namespace
